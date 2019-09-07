@@ -1,0 +1,102 @@
+
+public class Doubly_Linked_List_To_Balanced_BST {
+
+	Node head ;
+	
+	class Node {
+		int data;
+		Node prev,next;
+    
+		Node(int data){
+			this.data = data;
+			prev=next=null;
+		}
+	}
+	
+	public void insertNode( int data){
+		
+		if(head == null){
+			head = new Node(data);
+		}
+		else{
+			Node temp = head ;
+			while(temp.next != null){
+				temp = temp.next;
+			}
+			temp.next = new Node(data);
+			Node tempPrev = temp;
+			temp = temp.next;
+			temp.prev = tempPrev;
+		}
+	}
+	
+	public void printList(){
+		Node temp = head ;
+		while(temp != null){
+			System.out.print(temp.data + " ");
+			temp = temp.next;
+		}
+	}
+	
+	public int listSize(){
+		int count = 0 ;
+		Node temp = head ;
+		while(temp != null){
+			count++;
+			temp = temp.next;
+		}
+		return count;
+	}
+	
+	public Node convertBBST(){
+		int size = listSize();
+		return convertBST(size);
+	}
+	
+	public Node convertBST(int n){
+		
+		if(n<=0){
+			return null;
+		}
+		Node left = convertBST(n/2);
+		Node root = head;
+		root.prev = left;
+		head = head.next;
+		root.next = convertBST(n- n/2 -1);
+		return root;
+	}
+	
+	public void printInOrderTree(Node root){
+		if(root!=null){
+			printInOrderTree(root.prev);
+			System.out.print(root.data + " ");
+			printInOrderTree(root.next);
+		}
+	}
+	
+	public void printPreOrderTree(Node root){
+		if(root!=null){
+			System.out.print(root.data + " ");
+			printPreOrderTree(root.prev);
+			printPreOrderTree(root.next);
+		}
+	}
+	
+	public static void main(String arg[]){
+		Doubly_Linked_List_To_Balanced_BST list = new Doubly_Linked_List_To_Balanced_BST();
+		
+		list.insertNode(1);
+		list.insertNode(2);
+		list.insertNode(3);
+		list.insertNode(4);
+		list.insertNode(5);
+		list.insertNode(6);
+    
+		list.printList();
+		System.out.println("");
+		Node root = list.convertBBST();
+		list.printInOrderTree(root);
+		System.out.println("");
+		list.printPreOrderTree(root);
+	}
+}
