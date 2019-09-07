@@ -1,0 +1,38 @@
+package TreeCode;
+
+public class BalanceBinaryTree {
+
+	class Node{
+		int data;
+		Node left,right;
+		public Node(int data){
+			this.data = data;
+			left=right=null;
+		}
+	}
+	
+	public Node convertBalanceBT(int arr[],int start,int end){
+		Node head;
+		int mid = (start+end)/2 ;
+		if(start>end) return null;
+		head = new Node( arr[mid] );
+		head.left = convertBalanceBT(arr,start,mid-1);
+		head.right = convertBalanceBT(arr,mid+1,end);
+		return head;
+	}
+	
+	public void printBBT(Node head){
+		if(head!=null){
+			printBBT(head.left);
+			System.out.println(head.data);
+			printBBT(head.right);
+		}
+	}
+	
+	public static void main(String arg[]){
+		int arr[] = {1,2,3,4,5,6,7,8};
+		BalanceBinaryTree BBT = new BalanceBinaryTree();
+		Node root = BBT.convertBalanceBT(arr,0,arr.length-1);
+		BBT.printBBT(root);
+	}
+}
