@@ -30,7 +30,6 @@ public class Balance_BST_To_Doubly_Linked_List {
 		if(head==null){
 			head = root;
 		}else{
-			root.left = prev;
 			prev.right = root;
 		}
 		prev = root;
