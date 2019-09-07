@@ -1,6 +1,6 @@
 package TreeCode;
 
-public class BalanceBinaryTree {
+public class Balance_BinaryTree {
 
 	class Node{
 		int data;
@@ -31,7 +31,7 @@ public class BalanceBinaryTree {
 	
 	public static void main(String arg[]){
 		int arr[] = {1,2,3,4,5,6,7,8};
-		BalanceBinaryTree BBT = new BalanceBinaryTree();
+		Balance_BinaryTree BBT = new Balance_BinaryTree();
 		Node root = BBT.convertBalanceBT(arr,0,arr.length-1);
 		BBT.printBBT(root);
 	}
